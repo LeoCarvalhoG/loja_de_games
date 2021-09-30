@@ -68,7 +68,7 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public boolean isTema() {
+	public boolean getTema() {
 		return tema;
 	}
 
@@ -76,7 +76,7 @@ public class Produto {
 		this.tema = tema;
 	}
 
-	public boolean isSubcategoria() {
+	public boolean getSubcategoria() {
 		return subcategoria;
 	}
 
