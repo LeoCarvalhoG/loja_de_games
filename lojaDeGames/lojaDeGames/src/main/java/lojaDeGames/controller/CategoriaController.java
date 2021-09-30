@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Joao Vitor
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/categorias")
 @CrossOrigin("*")
@@ -27,6 +31,7 @@ public class CategoriaController {
 	@GetMapping
 	public ResponseEntity<List<Categoria>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> GetById(@PathVariable long id) {
@@ -35,7 +40,7 @@ public class CategoriaController {
 
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Categoria>> GetByNome(@PathVariable String nome) {
-		return ResponseEntity.ok(repositoty.findAllByNomeContainingIgnoreCase(nome));
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
 
 	// função salvarCategoria
