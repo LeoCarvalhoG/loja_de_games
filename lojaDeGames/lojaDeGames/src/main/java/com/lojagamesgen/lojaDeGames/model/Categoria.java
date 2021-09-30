@@ -6,16 +6,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * @author Leonardo
+ * @version 1.0
+ */
 @Entity
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCategoria;
-	
+
 	@NotBlank
 	private String nomeCategoria;
-	
+
 	public Long getIdCategoria() {
 		return idCategoria;
 	}
@@ -32,11 +36,4 @@ public class Categoria {
 		nomeCategoria = nomeCategoria;
 	}
 
-	/**
-	 * @author Leonardo
-	 * @version 1.0
-	 */
-	
-	
-	
 }
