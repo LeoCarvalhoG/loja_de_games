@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lojagamesgen.lojaDeGames.model.Categoria;
+import com.lojagamesgen.lojaDeGames.repository.CategoriaRepository;
+
 /**
  * @author Joao Vitor
  * @version 1.0
@@ -34,13 +37,14 @@ public class CategoriaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> GetById(@PathVariable long id) {
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Categoria> GetById(@PathVariable long idCategoria) {
+		return repository.findById(idCategoria).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Categoria>> GetByNome(@PathVariable String nome) {
-		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
+		return ResponseEntity.ok(repository.findByNomeCategoriaContainingIgnoreCase(nome));
 	}
 
 	// função salvarCategoria
@@ -56,8 +60,8 @@ public class CategoriaController {
 	}
 
 	// função deletarCategoria
-	@DeleteMapping("/{Categoria}")
-	public void delete(@PathVariable long categoria) {
-		repository.deleteByCategoria(categoria);
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable long idCategoria) {
+		repository.deleteById(idCategoria);
 	}
 }
