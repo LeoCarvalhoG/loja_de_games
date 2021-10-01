@@ -5,10 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * @author Leonardo
- * @version 1.0
+ * @version 1.1
  */
 @Entity
 public class Categoria {
@@ -18,6 +19,7 @@ public class Categoria {
 	private Long idCategoria;
 
 	@NotBlank
+	@Size(min = 1, max = 50)
 	private String nomeCategoria;
 
 	public Long getIdCategoria() {
@@ -25,15 +27,15 @@ public class Categoria {
 	}
 
 	public void setIdCategoria(Long idCategoria) {
-		idCategoria = idCategoria;
+		this.idCategoria = idCategoria;
 	}
 
-	public String getCategoria() {
+	public String getNomeCategoria() {
 		return nomeCategoria;
 	}
 
-	public void setCategoria(String categoria) {
-		nomeCategoria = nomeCategoria;
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
 	}
 
 }
