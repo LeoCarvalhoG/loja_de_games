@@ -1,4 +1,4 @@
-package lojaDeGames.controller;
+package com.lojagamesgen.lojaDeGames.controller;
 
 import java.util.List;
 
