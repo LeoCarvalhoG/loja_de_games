@@ -6,12 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * Classe espelho da tabela Categoria no banco loja_de_games.
  * 
  * @author Priscila
- * @since 1.0
+ * @version 1.1
  */
 @Entity
 public class Produto {
@@ -21,9 +22,11 @@ public class Produto {
 	private Long idProduto;
 
 	@NotBlank
+	@Size(min = 1, max = 100)
 	private String nomeProduto;
 
 	@NotBlank
+	@Size(min = 1, max = 300)
 	private String descricao;
 
 	@NotBlank
@@ -31,10 +34,12 @@ public class Produto {
 	private double preco;
 
 	@NotBlank
-	private boolean tema;
+	@Size(min = 1, max = 50)
+	private String tema;
 
 	@NotBlank
-	private boolean subcategoria;
+	@Size(min = 1, max = 50)
+	private String subcategoria;
 
 	public Long getIdProduto() {
 		return idProduto;
@@ -68,19 +73,20 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public boolean getTema() {
+	public String getTema() {
 		return tema;
 	}
 
-	public void setTema(boolean tema) {
+	public void setTema(String tema) {
 		this.tema = tema;
 	}
 
-	public boolean getSubcategoria() {
+	public String getSubcategoria() {
 		return subcategoria;
 	}
 
-	public void setSubcategoria(boolean subcategoria) {
+	public void setSubcategoria(String subcategoria) {
 		this.subcategoria = subcategoria;
 	}
+
 }
