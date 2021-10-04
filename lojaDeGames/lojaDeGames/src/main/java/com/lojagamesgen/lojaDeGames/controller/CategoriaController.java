@@ -2,6 +2,8 @@ package com.lojagamesgen.lojaDeGames.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,36 +34,36 @@ public class CategoriaController {
 
 	// função pegaCategoria
 	@GetMapping
-	public ResponseEntity<List<Categoria>> GetAll() {
+	public ResponseEntity<List<Categoria>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> GetById(@PathVariable long idCategoria) {
+	public ResponseEntity<Categoria> getById(@PathVariable Long idCategoria) {
 		return repository.findById(idCategoria).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Categoria>> GetByNome(@PathVariable String nome) {
+	public ResponseEntity<List<Categoria>> getByNome(@PathVariable String nome) {
 		return ResponseEntity.ok(repository.findByNomeCategoriaContainingIgnoreCase(nome));
 	}
 
 	// função salvarCategoria
 	@PostMapping
-	public ResponseEntity<Categoria> post(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> post(@Valid @RequestBody Categoria categoria) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
 	}
 
 	// função atualizarCategoria
 	@PutMapping
-	public ResponseEntity<Categoria> put(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> put(@Valid @RequestBody Categoria categoria) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
 	}
 
 	// função deletarCategoria
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable long idCategoria) {
+	public void delete(@PathVariable Long idCategoria) {
 		repository.deleteById(idCategoria);
 	}
 }
