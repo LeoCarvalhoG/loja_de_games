@@ -5,8 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Classe espelho da tabela Categoria no banco loja_de_games.
@@ -22,24 +27,26 @@ public class Produto {
 	private Long idProduto;
 
 	@NotBlank
-	@Size(min = 1, max = 100)
 	private String nomeProduto;
 
 	@NotBlank
 	@Size(min = 1, max = 300)
 	private String descricao;
 
-	@NotBlank
-	@Column(length = 10, precision = 2)
-	private double preco;
+	@NotNull
+	@Column(length = 10, precision = 3)
+	private float preco;
 
 	@NotBlank
-	@Size(min = 1, max = 50)
 	private String tema;
 
 	@NotBlank
-	@Size(min = 1, max = 50)
 	private String subcategoria;
+
+	@ManyToOne
+	@JoinColumn(name = "fk_categoria")
+	@JsonIgnoreProperties({ "produtos" })
+	private Categoria categoriaRelacionada;
 
 	public Long getIdProduto() {
 		return idProduto;
@@ -65,11 +72,11 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public double getPreco() {
+	public float getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(float preco) {
 		this.preco = preco;
 	}
 
@@ -87,6 +94,14 @@ public class Produto {
 
 	public void setSubcategoria(String subcategoria) {
 		this.subcategoria = subcategoria;
+	}
+
+	public Categoria getCategoriaRelacionada() {
+		return categoriaRelacionada;
+	}
+
+	public void setCategoriaRelacionada(Categoria categoriaRelacionada) {
+		this.categoriaRelacionada = categoriaRelacionada;
 	}
 
 }
