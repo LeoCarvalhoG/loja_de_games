@@ -32,38 +32,38 @@ public class ProdutoController {
 	private @Autowired ProdutoRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> GetAll() {
+	public ResponseEntity<List<Produto>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
-	@GetMapping("/{id}") // vai usar o valor de "id"
-	public ResponseEntity<Produto> GetById(@PathVariable(value = "id") long idProduto) {
+	@GetMapping("/{id}")
+	public ResponseEntity<Produto> getById(@PathVariable(value = "id") long idProduto) {
 		return repository.findById(idProduto).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/nome/{nomeProduto}")
-	public ResponseEntity<List<Produto>> GetByNomeProduto(@PathVariable(value = "nomeProduto") String nomeProduto) {
+	public ResponseEntity<List<Produto>> getByNomeProduto(@PathVariable(value = "nomeProduto") String nomeProduto) {
 		return ResponseEntity.ok(repository.findByNomeProdutoContainingIgnoreCase(nomeProduto));
 	}
 
 	@GetMapping("/tema/{tema}")
-	public ResponseEntity<List<Produto>> GetByTema(@PathVariable(value = "tema") String tema) {
+	public ResponseEntity<List<Produto>> getByTema(@PathVariable(value = "tema") String tema) {
 		return ResponseEntity.ok(repository.findByTemaContainingIgnoreCase(tema));
 	}
 
 	@PostMapping
-	public ResponseEntity<Produto> Post(@Valid @RequestBody Produto novoProduto) {
+	public ResponseEntity<Produto> post(@Valid @RequestBody Produto novoProduto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(novoProduto));
 	}
 
 	@PutMapping
-	public ResponseEntity<Produto> Put(@Valid @RequestBody Produto novoProduto) {
+	public ResponseEntity<Produto> put(@Valid @RequestBody Produto novoProduto) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(novoProduto));
 	}
 
 	@DeleteMapping("/{id}")
-	public void Delete(@PathVariable(value = "id") long idProduto) {
+	public void delete(@PathVariable(value = "id") Long idProduto) {
 		repository.deleteById(idProduto);
 	}
 }
