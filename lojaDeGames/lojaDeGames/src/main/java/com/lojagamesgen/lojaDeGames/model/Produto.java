@@ -48,6 +48,11 @@ public class Produto {
 	@JsonIgnoreProperties({ "produtos" })
 	private Categoria categoriaRelacionada;
 
+	@ManyToOne
+	@JoinColumn(name = "fk_usuario")
+	@JsonIgnoreProperties({ "produtos" })
+	private Usuario usuarioRelacionado;
+
 	public Long getIdProduto() {
 		return idProduto;
 	}
@@ -102,6 +107,14 @@ public class Produto {
 
 	public void setCategoriaRelacionada(Categoria categoriaRelacionada) {
 		this.categoriaRelacionada = categoriaRelacionada;
+	}
+
+	public Usuario getUsuarioRelacionado() {
+		return usuarioRelacionado;
+	}
+
+	public void setUsuarioRelacionado(Usuario usuarioRelacionado) {
+		this.usuarioRelacionado = usuarioRelacionado;
 	}
 
 }
