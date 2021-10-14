@@ -1,4 +1,4 @@
-package configuration;
+package com.lojagamesgen.lojaDeGames.configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.lojagamesgen.lojaDeGames.controller;"))
+				.apis(RequestHandlerSelectors.basePackage("com.lojagamesgen.lojaDeGames.controller"))
 				.paths(PathSelectors.any()).build().apiInfo(metadata()).useDefaultResponseMessages(false)
 				.globalResponses(HttpMethod.GET, responseMessage()).globalResponses(HttpMethod.POST, responseMessage())
 				.globalResponses(HttpMethod.PUT, responseMessage())
@@ -28,13 +28,17 @@ public class SwaggerConfig {
 	}
 
 	public static ApiInfo metadata() {
-		return new ApiInfoBuilder().title("API - Blog Pessoal").description("Projeto API Spring - Blog Pessoal")
-				.version("1.0.0").license("Apache License Version 2.0").licenseUrl("https://github.com/rafaelq80")
+		return new ApiInfoBuilder()
+				.title("API - Blog Pessoal")
+				.description("Projeto API Spring - Blog Pessoal")
+				.version("1.0.0")
+				.license("Apache License Version 2.0")
+				.licenseUrl("https://github.com/joaovitordiasdasilva/loja_de_games")
 				.contact(contact()).build();
 	}
 
 	private static Contact contact() {
-		return new Contact("Rafael Queiróz", "https://github.com/rafaelq80", "rafaelproinfo@gmail.com");
+		return new Contact("Grupo 1", "https://github.com/joaovitordiasdasilva/loja_de_games", "");
 	}
 
 	private static List<Response> responseMessage() {
