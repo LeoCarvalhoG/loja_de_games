@@ -21,16 +21,7 @@ public class UsuarioService {
 
 	private @Autowired UsuarioRepository repository;
 
-	/**
-	 * Metodo utilizado para cadastrar usuário validando duplicidade de email no
-	 * banco
-	 * 
-	 * @param usuarioParaCadastrar do tipo Usuario
-	 * @return Optional com Usuario cadastrado caso email não seja existente
-	 * @author Turma34
-	 * @since 2.0
-	 * 
-	 */
+
 	public Optional<Object> cadastrarUsuario(Usuario usuarioParaCadastrar) {
 		return repository.findByEmail(usuarioParaCadastrar.getEmail()).map(usuarioExistente -> {
 			return Optional.empty();
@@ -41,15 +32,6 @@ public class UsuarioService {
 
 	}
 
-	/**
-	 * Metodo utilizado para atualizar usuario no banco
-	 * 
-	 * @param usuarioParaAtualizar do tipo Usuario
-	 * @return Optional com Usuario atualizado
-	 * @author Turma34
-	 * @since 1.5
-	 * 
-	 */
 	public Optional<Usuario> atualizarUsuario(Usuario usuarioParaAtualizar) {
 		return repository.findById(usuarioParaAtualizar.getIdUsuario()).map(resp -> {
 			resp.setNome(usuarioParaAtualizar.getNome());
@@ -61,18 +43,6 @@ public class UsuarioService {
 
 	}
 
-	/**
-	 * Metodo utilizado para pegar credenciais do usuario com Tokem (Formato Basic),
-	 * este método sera utilizado para retornar ao front o token utilizado para ter
-	 * acesso aos dados do usuario e mantelo logado no sistema
-	 * 
-	 * @param usuarioParaAutenticar do tipo UsuarioLoginDTO necessario email e senha
-	 *                              para validar
-	 * @return ResponseEntity com CredenciaisDTO preenchido com informações mais o
-	 *         Token
-	 * @since 1.0
-	 * @author Turma34
-	 */
 	public ResponseEntity<CredenciaisDTO> pegarCredenciais(UsuarioLoginDTO usuarioParaAutenticar) {
 		return repository.findByEmail(usuarioParaAutenticar.getEmail()).map(resp -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -97,15 +67,6 @@ public class UsuarioService {
 
 	}
 
-	/**
-	 * Metodo statico utilizado para gerar token
-	 * 
-	 * @param email
-	 * @param senha
-	 * @return Token no formato Basic para autenticação
-	 * @since 1.0
-	 * @author Turma34
-	 */
 	private static String gerarToken(String email, String senha) {
 		String estruturaBasic = email + ":" + senha; // gustavoboaz@gmail.com:134652
 		byte[] estruturaBase64 = Base64.encodeBase64(estruturaBasic.getBytes(Charset.forName("US-ASCII"))); // hHJyigo-o+i7%0ÍUG465sas=-
@@ -113,14 +74,6 @@ public class UsuarioService {
 
 	}
 
-	/**
-	 * Método estatico que recebe a senha do usuario o criptografa
-	 * 
-	 * @param senha
-	 * @return String da senha criptografada
-	 * @since 1.0
-	 * @author Turma34
-	 */
 	private static String encriptadorDeSenha(String senha) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder.encode(senha);
